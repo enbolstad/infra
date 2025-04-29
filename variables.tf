@@ -23,54 +23,54 @@ variable "endpoints" {
 variable "subscription_id_prod" {
   description = "The prod subscription ID"
   type        = string
-  default     = "538f8f82-ce85-4586-b455-60a5ae312e50"
+  default     = "464c8a03-5870-4a25-94f6-69cc795997ed"
 }
 
 variable "subscription_id_nonprod" {
   description = "The nonprod subscription ID"
   type        = string
-  default     = "423c4ba2-3435-4b00-a4a9-e16a16c94e77"
+  default     = "0"
 
 }
 
 variable "subscription_display_name_nonprod" {
   description = "The display name of the nonprod subscription"
   type        = string
-  default     = "ADME-NonProd"
+  default     = "0"
 
 }
 
 variable "subscription_display_name_prod" {
   description = "The display name of the prod subscription"
   type        = string
-  default     = "ADME-Prod"
+  default     = "Microsoft Azure-sponsing"
 
 }
 
 variable "tenant_id" {
   description = "The Id of entraID tenant"
   type        = string
-  default     = "3b7e4170-8348-4aa4-bfae-06a3e1867469"
+  default     = "8b87af7d-8647-4dc7-8df4-5f69a2011bb5"
 
 }
 
 variable "location" {
   description = "The location of the resource group"
   type        = string
-  default     = "westeurope"
+  default     = "northeurope"
 
 }
 
 variable "authAppId_prod" {
   description = "The auth app id"
   type        = string
-  default     = "b5985dfe-4952-493b-ad5a-77dbc9942648"
+  default     = "f37be710-de99-4d1d-bc62-8f5cde53d030"
 
 }
 variable "authAppId_nonprod" {
   description = "The auth app id"
   type        = string
-  default     = "eb356ce6-96ed-4e75-aad2-ebf22280af51"
+  default     = "0"
 
 }
 
@@ -78,7 +78,7 @@ variable "authAppId_nonprod" {
 variable "adme_sku" {
   description = "The sku of the adme instance"
   type        = string
-  default     = "Standard"
+  default     = "Developer"
 
   validation {
     condition     = contains(["Developer", "Standard"], var.adme_sku)
