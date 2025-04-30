@@ -10,7 +10,7 @@ locals {
   adme_name                 = var.environment == "prod" ? "soprabp76" : "soprabpdev76"
   adme_datapartition_name   = var.environment == "prod" ? "preprod" : "dev"
   log_sa_name               = var.environment == "prod" ? "soprbpadmepwe18" : "soprbpadmenpwe19"
-  adme_sku                  = var.environment == "prod" ? "Standard" : "Developer"
+  adme_sku                  = var.environment == "prod" ? "Developer" : "Developer"
   authAppId                 = var.environment == "prod" ? var.authAppId_prod : var.authAppId_nonprod
   tags                      = merge(var.tags, { environment = var.environment == "prod" ? "Prod" : "NonProd" })
 
