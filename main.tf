@@ -9,7 +9,7 @@ locals {
   rg_name_osdu_service_log  = format("rg-msa-adme-mon-%s-we-001", var.environment)
   adme_name                 = var.environment == "prod" ? "akerbp" : "akerbpdev"
   adme_datapartition_name   = var.environment == "prod" ? "preprod" : "dev"
-  log_sa_name               = var.environment == "prod" ? "akerbpadmepwe18" : "akerbpadmenpwe19"
+  log_sa_name               = var.environment == "prod" ? "soprbpadmepwe18" : "soprbpadmenpwe19"
   adme_sku                  = var.environment == "prod" ? "Standard" : "Developer"
   authAppId                 = var.environment == "prod" ? var.authAppId_prod : var.authAppId_nonprod
   tags                      = merge(var.tags, { environment = var.environment == "prod" ? "Prod" : "NonProd" })
