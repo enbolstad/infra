@@ -7,7 +7,7 @@ locals {
   adme_vnet_subnet_name     = format("snet-msa-app-adme-pep-%s-we-001", var.environment)
   law_name                  = format("law-msa-adme-mon-%s-we-001", var.environment)
   rg_name_osdu_service_log  = format("rg-msa-adme-mon-%s-we-001", var.environment)
-  adme_name                 = var.environment == "prod" ? "soprabp76" : "soprabpdev76"
+  adme_name                 = var.environment == "prod" ? "soprabp85" : "soprabpdev76"
   adme_datapartition_name   = var.environment == "prod" ? "preprod" : "dev"
   log_sa_name               = var.environment == "prod" ? "soprbpadmepwe18" : "soprbpadmenpwe19"
   adme_sku                  = var.environment == "prod" ? "Developer" : "Developer"
