@@ -1,0 +1,188 @@
+name: Push to prod
+
+on:
+  workflow_dispatch:
+
+env:
+  TF_LOG: INFO
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs: 
+  terraform-state-list-before-move:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Install the latest version of Terraform CLI 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    # Log into Azure with OIDC integration
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    # Verify subscription
+    - name: Verify subscription (Prod)
+      run: az account show
+
+    # Initialize Terraform
+    - name: Terraform Init
+      env:
+        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+        CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+        RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
+
+    # Run Terraform plan and save the plan to a file
+    - name: Terraform State mv
+      id: move
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      run: terraform state list
+
+  terraform-state-move:
+        runs-on: ubuntu-latest
+        environment: prod
+        steps:
+        # Checkout the repository to the GitHub Actions runner
+        - name: Checkout
+          uses: actions/checkout@v3
+    
+        # Install the latest version of Terraform CLI 
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v3
+    
+        # Log into Azure with OIDC integration
+        - name: 'Az CLI login'
+          uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    
+        # Verify subscription
+        - name: Verify subscription (Prod)
+          run: az account show
+    
+        # Initialize Terraform
+        - name: Terraform Init
+          env:
+            STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+            CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+            RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+            ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
+    
+        # Run Terraform plan and save the plan to a file
+        - name: Terraform State mv
+          id: move
+          env:
+            ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          run: terraform state mv module.adme_public_endpoints.azurerm_resource_group_template_deployment.default module.adme_public_endpoints.azapi_resource.adme
+
+  terraform-state-list-after-move:
+            runs-on: ubuntu-latest
+            environment: prod
+            steps:
+            # Checkout the repository to the GitHub Actions runner
+            - name: Checkout
+              uses: actions/checkout@v3
+        
+            # Install the latest version of Terraform CLI 
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+        
+            # Log into Azure with OIDC integration
+            - name: 'Az CLI login'
+              uses: azure/login@v1
+              with:
+                client-id: ${{ secrets.AZURE_CLIENT_ID }}
+                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        
+            # Verify subscription
+            - name: Verify subscription (Prod)
+              run: az account show
+        
+            # Initialize Terraform
+            - name: Terraform Init
+              env:
+                STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+                CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+                RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+                ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+                ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+              run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
+        
+            # Run Terraform plan and save the plan to a file
+            - name: Terraform State list
+              id: list
+              env:
+                ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+                ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+              run: terraform state list
+
+  terraform-plan:
+                runs-on: ubuntu-latest
+                environment: prod
+                steps:
+                # Checkout the repository to the GitHub Actions runner
+                - name: Checkout
+                  uses: actions/checkout@v3
+            
+                # Install the latest version of Terraform CLI 
+                - name: Setup Terraform
+                  uses: hashicorp/setup-terraform@v3
+            
+                # Log into Azure with OIDC integration
+                - name: 'Az CLI login'
+                  uses: azure/login@v1
+                  with:
+                    client-id: ${{ secrets.AZURE_CLIENT_ID }}
+                    tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                    subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            
+                # Verify subscription
+                - name: Verify subscription (Prod)
+                  run: az account show
+            
+                # Initialize Terraform
+                - name: Terraform Init
+                  env:
+                    STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+                    CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+                    RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+                    ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+                    ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                    ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+                  run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
+            
+                # Run Terraform plan and save the plan to a file
+                - name: Terraform plan
+                  id: plan
+                  env:
+                    ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+                    ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                    ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+                  run: terraform plan -input=false -var 'environment=prod'
