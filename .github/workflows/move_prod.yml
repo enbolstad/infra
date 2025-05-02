@@ -58,6 +58,7 @@ jobs:
   terraform-state-move:
         runs-on: ubuntu-latest
         environment: prod
+        needs: terraform-state-list-before-move
         steps:
         # Checkout the repository to the GitHub Actions runner
         - name: Checkout
@@ -102,6 +103,7 @@ jobs:
   terraform-state-list-after-move:
             runs-on: ubuntu-latest
             environment: prod
+            needs: terraform-state-move
             steps:
             # Checkout the repository to the GitHub Actions runner
             - name: Checkout
@@ -146,6 +148,7 @@ jobs:
   terraform-plan:
                 runs-on: ubuntu-latest
                 environment: prod
+                needs: terraform-state-list-after-move
                 steps:
                 # Checkout the repository to the GitHub Actions runner
                 - name: Checkout
