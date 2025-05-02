@@ -1,5 +1,4 @@
-name: remove and import adme in statefile
-
+name: import_only_prod
 on:
   workflow_dispatch:
 
