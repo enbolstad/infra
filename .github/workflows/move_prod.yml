@@ -98,7 +98,7 @@ jobs:
             ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
             ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          run: terraform state mv module.adme_public_endpoints.azurerm_resource_group_template_deployment.default module.adme_public_endpoints.azapi_resource.adme
+          run: terraform state mv module.adme_public_endpoint.azurerm_resource_group_template_deployment.default module.adme_public_endpoints.azapi_resource.adme
 
   terraform-state-list-after-move:
             runs-on: ubuntu-latest
