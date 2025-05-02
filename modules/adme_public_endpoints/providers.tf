@@ -9,3 +9,22 @@ terraform {
       source  = "Azure/azapi"
       version = "2.0.1"
     }
+
+  }
+  backend "azurerm" {
+    key              = "github.terraform.tfstate"
+    use_oidc         = true
+    use_azuread_auth = true
+  }
+
+  required_version = ">=0.12"
+}
+provider "azurerm" {
+  features {}
+  use_oidc = true
+
+}
+provider "azapi" {
+  use_oidc = true
+
+}
