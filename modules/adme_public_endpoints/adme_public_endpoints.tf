@@ -66,13 +66,11 @@ resource "azapi_resource" "adme" {
   body = {
     properties = {
       authAppId = var.authAppId
-
       dataPartitionNames = [
         {
           name = var.adme_datapartition_name
         }
       ]
-
       sku = {
         name = var.adme_sku
         tier = "Standard"
