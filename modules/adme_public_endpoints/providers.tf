@@ -12,4 +12,14 @@ terraform {
 
   }
 
+  required_version = ">=0.12"
+}
+provider "azurerm" {
+  features {}
+  use_oidc = true
+
+}
+provider "azapi" {
+  use_oidc = true
+
 }
