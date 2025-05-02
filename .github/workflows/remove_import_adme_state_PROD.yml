@@ -184,7 +184,7 @@ jobs:
                     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
                     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
                     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-                  run: terraform import module.adme_public_endpoint.azapi_resource.adme /subscriptions/464c8a03-5870-4a25-94f6-69cc795997ed/resourceGroups/rg-msa-app-adme-prod-we-001/providers/Microsoft.OpenEnergyPlatform/energyServices/soprabp85
+                  run: terraform import -var 'environment=prod' module.adme_public_endpoint.azapi_resource.adme /subscriptions/464c8a03-5870-4a25-94f6-69cc795997ed/resourceGroups/rg-msa-app-adme-prod-we-001/providers/Microsoft.OpenEnergyPlatform/energyServices/soprabp85
 
   terraform-state-plan-after-remove:
                     runs-on: ubuntu-latest
