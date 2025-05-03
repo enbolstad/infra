@@ -21,6 +21,6 @@ resource "azapi_resource" "adme" {
   schema_validation_enabled = true
   type                      = "Microsoft.OpenEnergyPlatform/energyServices@2022-04-04-preview"
   depends_on = [
-    azapi_resource.res-1,
+    azurerm_resource_group.default
   ]
 }
