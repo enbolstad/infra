@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 resource "azapi_resource" "adme" {
-  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2023-02-21-preview"
+  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2022-04-04-preview"
   name                      = var.adme_name
   location                  = var.location
   parent_id                 = azurerm_resource_group.default.id
@@ -26,10 +26,8 @@ resource "azapi_resource" "adme" {
       ]
       sku = {
         name = var.adme_sku
-        tier = "Standard"
       }
-
-      publicNetworkAccess = "Enabled"
+      publicNetworkAccess = true
     }
   }
 }
