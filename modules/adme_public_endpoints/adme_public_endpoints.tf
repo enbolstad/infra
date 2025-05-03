@@ -11,7 +11,7 @@ resource "azapi_resource" "adme" {
       dataPartitionNames = [{
         name = "preprod"
         }, {
-        name = "preprod2"
+        name = "dp2"
       }]
     }
   }
