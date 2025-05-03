@@ -5,29 +5,22 @@ resource "azurerm_resource_group" "default" {
 }
 
 resource "azapi_resource" "adme" {
-  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2022-04-04-preview"
-  name                      = var.adme_name
-  location                  = var.location
-  parent_id                 = azurerm_resource_group.default.id
-  schema_validation_enabled = false
-  timeouts {
-    create = "5h30m"
-    update = "5h30m"
-    delete = "5h30m"
-  }
-
   body = {
     properties = {
-      authAppId = var.authAppId
-      dataPartitionNames = [
-        {
-          name = var.adme_datapartition_name
-        }
-      ]
-      sku = {
-        name = var.adme_sku
-      }
-      publicNetworkAccess = true
+      authAppId = "f37be710-de99-4d1d-bc62-8f5cde53d030"
+      dataPartitionNames = [{
+        name = "preprod"
+      }]
     }
   }
+  ignore_casing             = false
+  ignore_missing_property   = true
+  location                  = "northeurope"
+  name                      = "soprabp85"
+  parent_id                 = "/subscriptions/464c8a03-5870-4a25-94f6-69cc795997ed/resourceGroups/rg-msa-app-adme-prod-we-001"
+  schema_validation_enabled = true
+  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2022-04-04-preview"
+  depends_on = [
+    azapi_resource.res-1,
+  ]
 }
