@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs: 
-  terraform-import:
+  terraform-plan:
                 runs-on: ubuntu-latest
                 environment: prod
                 steps:
