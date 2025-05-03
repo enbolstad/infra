@@ -12,6 +12,8 @@ resource "azapi_resource" "adme" {
         name = "preprod"
         }, {
         name = "dp3"
+        }, {
+        name = "dp4"
       }]
     }
   }
