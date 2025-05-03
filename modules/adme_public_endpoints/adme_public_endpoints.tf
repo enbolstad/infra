@@ -9,8 +9,7 @@ resource "azapi_resource" "adme" {
     properties = {
       authAppId = "f37be710-de99-4d1d-bc62-8f5cde53d030"
       dataPartitionNames = [{
-        name = "preprod",
-        name = "prepreprod"
+        name = "preprod"
       }]
     }
   }
