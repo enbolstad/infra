@@ -10,6 +10,9 @@ resource "azapi_resource" "adme" {
       authAppId = var.authAppId
       dataPartitionNames = [{
         name = "preprod"
+        },
+        {
+          name = "preprod2"
       }]
     }
   }
