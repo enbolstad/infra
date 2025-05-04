@@ -32,7 +32,7 @@ resource "azapi_resource" "adme" {
       ]
 
       sku = {
-        name = "Developer"
+        name = var.adme_sku
         tier = "Standard"
       }
 
