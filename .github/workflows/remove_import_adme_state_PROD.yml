@@ -126,7 +126,7 @@ jobs:
 
     - name: Terraform import
       id: import
-      run: terraform import -var 'environment=prod' module.adme_public_endpoint[0].azapi_resource.adme /subscriptions/464c8a03-5870-4a25-94f6-69cc795997ed/resourceGroups/rg-msa-app-adme-prod-we-001/providers/Microsoft.OpenEnergyPlatform/energyServices/soprabp85
+      run: terraform import -var 'environment=prod' module.adme_public_endpoint[0].azapi_resource.adme /subscriptions/464c8a03-5870-4a25-94f6-69cc795997ed/resourceGroups/rg-msa-app-adme-prod-we-001/providers/Microsoft.OpenEnergyPlatform/energyServices/soprabp777
 
   terraform-state-plan-after-remove:
     runs-on: ubuntu-latest
