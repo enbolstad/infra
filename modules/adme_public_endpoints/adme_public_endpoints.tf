@@ -18,7 +18,7 @@ resource "azapi_resource" "adme" {
     Project     = "OSDU"
     Environment = "dev"
   }
-  parent_id                 = azurerm_resource_group.default
+  parent_id                 = azurerm_resource_group.default.id
   schema_validation_enabled = false
   body = {
     properties = {
