@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  TF_LOG: INFO
 
 permissions:
   id-token: write
