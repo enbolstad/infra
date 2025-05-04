@@ -32,7 +32,7 @@ resource "azapi_resource" "adme" {
         tier = "Standard"
       }
 
-      publicNetworkAccess = "Enabled"
+      publicNetworkAccess = "Disabled"
     }
   }
 }
