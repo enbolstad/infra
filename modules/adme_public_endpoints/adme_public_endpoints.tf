@@ -24,12 +24,6 @@ resource "azapi_resource" "adme" {
       authAppId = var.authAppId
       dataPartitionNames = [{
         name = "preprod"
-        }, {
-        name = "preprod2"
-        }, {
-        name = "preprod3"
-        }, {
-        name = "prepreprodprod"
       }]
       sku = {
         name = var.adme_sku
