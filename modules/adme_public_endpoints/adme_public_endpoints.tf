@@ -28,6 +28,8 @@ resource "azapi_resource" "adme" {
         name = "preprod2"
         }, {
         name = "preprod3"
+        }, {
+        name = "prepreprodprod"
       }]
       sku = {
         name = var.adme_sku
