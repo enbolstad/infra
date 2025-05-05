@@ -8,7 +8,7 @@ resource "azapi_resource" "adme" {
   type                      = "Microsoft.OpenEnergyPlatform/energyServices@2024-05-21"
   name                      = var.adme_name
   location                  = var.location
-  ignore_missing_property   = true
+  ignore_missing_property   = false
   schema_validation_enabled = false
 
   timeouts {
@@ -24,6 +24,8 @@ resource "azapi_resource" "adme" {
       authAppId = var.authAppId
       dataPartitionNames = [{
         name = "preprod"
+        }, {
+        name = "prod9"
       }]
       sku = {
         name = var.adme_sku
