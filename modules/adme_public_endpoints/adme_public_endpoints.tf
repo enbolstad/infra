@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 resource "azapi_resource" "adme" {
-  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2023-02-21-preview"
+  type                      = "Microsoft.OpenEnergyPlatform/energyServices@2024-05-21"
   name                      = var.adme_name
   location                  = var.location
   ignore_missing_property   = true
