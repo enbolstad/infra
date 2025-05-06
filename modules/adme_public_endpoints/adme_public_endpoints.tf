@@ -6,9 +6,9 @@ resource "azurerm_resource_group" "default" {
 
 resource "azapi_resource" "adme" {
   type                      = "Microsoft.OpenEnergyPlatform/energyServices@2024-05-21"
-  name                      = var.adme_name
+  name                      = "datapartitiontestadme21"
   location                  = var.location
-  ignore_missing_property   = false
+  ignore_missing_property   = true
   schema_validation_enabled = false
 
   timeouts {
@@ -23,12 +23,10 @@ resource "azapi_resource" "adme" {
     properties = {
       authAppId = var.authAppId
       dataPartitionNames = [{
-        name = "preprod"
-        }, {
-        name = "prod9"
+        name = "dp1"
       }]
       sku = {
-        name = var.adme_sku
+        name = "Developer"
         tier = "Standard"
       }
 
